@@ -10,6 +10,16 @@ export const getProducts = async (req, res) => {
   }
 };
 
+export const getProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const product = await Product.findOne({ where: { id } });
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const createProduct = async (req, res) => {
   const { title, price, description } = req.body;
   try {
